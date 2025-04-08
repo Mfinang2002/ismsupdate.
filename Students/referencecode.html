@@ -41,6 +41,7 @@
             font-size: 1rem;
             font-weight: bold;
             margin-bottom: 20px;
+            transition: transform 0.2s ease-in-out; /* Add transition for smooth effect */
         }
 
         .list-group-item a {
@@ -49,8 +50,8 @@
         }
 
         .list-group-item:hover {
-            background-color: #ecf0f1;
-            border-radius: 5px;
+            transform: translateY(-5px); /* Slightly lift the item */
+            background-color: #023685; /* Optional: Change background color slightly */
         }
 
         .main-content {
@@ -141,6 +142,55 @@
                 width: 100%;
             }
         }
+        .dropdown-toggle::after {
+            display: inline-block;
+            margin-left: .255em;
+            vertical-align: .255em;
+            content: "";
+            border-top: .3em solid;
+            border-right: .3em solid transparent;
+            border-bottom: 0;
+            border-left: .3em solid transparent;
+        }
+
+        .dropdown-menu {
+            display: none;
+            position: absolute;
+            left: 100%;
+            top: 0;
+            margin-top: .125rem;
+            margin-left: .25rem;
+            min-width: 10rem;
+            padding: .5rem 0;
+            z-index: 1000;
+            background-color: #fff;
+            border: 1px solid rgba(0, 0, 0, .15);
+            border-radius: .25rem;
+            box-shadow: 0 .5rem 1rem rgba(0, 0, 0, .175);
+        }
+
+        .show > .dropdown-menu {
+            display: block;
+        }
+
+        .dropdown-item {
+            display: block;
+            width: 100%;
+            padding: .25rem 1.5rem;
+            clear: both;
+            font-weight: 400;
+            color: #212529;
+            text-align: inherit;
+            white-space: nowrap;
+            background-color: transparent;
+            border: 0;
+        }
+
+        .dropdown-item:hover, .dropdown-item:focus {
+            color: #16181b;
+            text-decoration: none;
+            background-color: #f8f9fa;
+        }
     </style>
 </head>
 <body>
@@ -152,7 +202,13 @@
             <li class="list-group-item"><a href="#"><i class="fas fa-book"></i> My Modules</a></li>
             <li class="list-group-item"><a href="#"><i class="fa-solid fa-money-bill-wave"></i> Payments</a></li>
             <li class="list-group-item"><a href="examinationnumbers.html"><i class="fa-regular fa-newspaper"></i> Examination Number</a></li>
-            <li class="list-group-item"><a href="#"><i class="fa-solid fa-graduation-cap"></i> Results</a></li>
+            <li class="list-group-item">
+                <a href="#" id="resultsDropdownToggle"><i class="fa-solid fa-graduation-cap"></i> Results</a>
+                <ul class="list-group collapse" id="resultsDropdown">
+                    <li class="list-group-item"><a href="#">Course Work</a></li>
+                    <li class="list-group-item"><a href="#">Semester Results</a></li>
+                </ul>
+            </li>
             <li class="list-group-item"><a href="#"><i class="fas fa-key"></i> Change Password</a></li>
             <li class="list-group-item"><a href="userprofile.html"><i class="fas fa-user"></i> Profile</a></li>
             <li class="list-group-item"><a href="studentlogin.html"><i class="fas fa-sign-out-alt"></i> Logout</a></li>
@@ -192,6 +248,8 @@
             const sideNav = document.querySelector('.side-nav');
             const mainContent = document.querySelector('.main-content');
             const arrowIcon = document.querySelector('.toggle-btn i');
+            const resultsDropdownToggle = document.getElementById('resultsDropdownToggle');
+            const resultsDropdown = document.getElementById('resultsDropdown');
 
             toggleBtn.addEventListener('click', function () {
                 sideNav.classList.toggle('hide');
@@ -203,9 +261,13 @@
                     mainContent.style.marginLeft = '260px';
                 }
             });
+
+            resultsDropdownToggle.addEventListener('click', function (e) {
+                e.preventDefault();
+                resultsDropdown.classList.toggle('show');
+            });
         });
     </script>
 
 </body>
 </html>
-
