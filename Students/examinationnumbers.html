@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Examination Numbers</title>
+    <link rel="stylesheet" href="path/to/your/styles.css"> <!-- Ensure this path is correct -->
+</head>
+<body>
+    <div id="top-bar"></div>
+    <div id="side-navigation"></div>
+    <div class="main-content">
+        <h1 class="centered-heading">Examination Numbers</h1>
+        <div class="card">
+            <ul class="examination-list">
+                <li>Semester Examination Number <button class="download-button"><i class="download-icon"></i> Download</button></li>
+                <li>Test 1 Examination Number <button class="download-button"><i class="download-icon"></i> Download</button></li>
+                <li>Test 2 Examination Number <button class="download-button"><i class="download-icon"></i> Download</button></li>
+                <li>Special Examination Number <button class="download-button"><i class="download-icon"></i> Download</button></li>
+                <li>Supplementary Examination Number <button class="download-button"><i class="download-icon"></i> Download</button></li>
+            </ul>
+        </div>
+    </div>
+    <script>
+        // Load top bar and side navigation
+        fetch('referencecode.html')
+            .then(response => response.text())
+            .then(data => {
+                document.getElementById('top-bar').innerHTML = 
+                    new DOMParser().parseFromString(data, 'text/html').querySelector('#top-bar').outerHTML;
+                document.getElementById('side-navigation').innerHTML = 
+                    new DOMParser().parseFromString(data, 'text/html').querySelector('#side-navigation').outerHTML;
+            });
+
+        // Add styles for the centered heading and card
+        document.head.innerHTML += `
+            <style>
+                .centered-heading {
+                    text-align: center;
+                    margin-top: 20px;
+                }
+                .card {
+                    margin: 20px auto;
+                    padding: 20px;
+                    border: 1px solid #ccc;
+                    border-radius: 8px;
+                    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+                    max-width: 600px;
+                }
+                .examination-list {
+                    list-style-type: none;
+                    padding: 0;
+                }
+                .examination-list li {
+                    display: flex;
+                    justify-content: space-between;
+                    align-items: center;
+                    padding: 10px 0;
+                    border-bottom: 1px solid #eee;
+                }
+                .download-button {
+                    background-color: #007bff;
+                    color: white;
+                    border: none;
+                    padding: 5px 10px;
+                    border-radius: 4px;
+                    cursor: pointer;
+                }
+                .download-icon {
+                    margin-right: 5px;
+                }
+            </style>
+        `;
+    </script>
+</body>
+</html>
