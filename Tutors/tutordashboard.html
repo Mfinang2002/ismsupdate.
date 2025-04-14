@@ -1,226 +1,142 @@
+<!-- Save this as your main timetable page -->
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Updated Tutor Timetable</title>
-    <!-- Bootstrap 5 CSS -->
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet">
-    <style>
-        /* General container for the timetable */
-        .timetable-container {
-            max-width: 100%;
-            margin: 20px auto;
-            padding: 20px;
-            background-color: #f8f9fa;
-            border-radius: 8px;
-            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-        }
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Updated Tutor Timetable</title>
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet"/>
 
-        .timetable-title {
-            text-align: center;
-            font-size: 1.8rem;
-            font-weight: bold;
-            margin-bottom: 20px;
-        }
+  <style>
+    .timetable-container {
+      max-width: 100%;
+      margin-top: 20px;
+      margin-left: 260px;
+      padding: 20px;
+      background-color: #f8f9fa;
+      border-radius: 8px;
+      box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+      transition: margin-left 0.3s ease;
+    }
 
-        /* Timetable styling */
-        .timetable {
-            width: 100%;
-            border-collapse: collapse;
-            table-layout: fixed;
-        }
+    .timetable-title {
+      text-align: center;
+      font-size: 1.8rem;
+      font-weight: bold;
+      margin-bottom: 20px;
+    }
 
-        .timetable th, .timetable td {
-            text-align: center;
-            padding: 4px;
-            font-size: 0.85rem;
-            border: 1px solid #e0e0e0;
-        }
+    .timetable {
+      width: 100%;
+      border-collapse: collapse;
+      table-layout: fixed;
+    }
 
-        /* Header styling */
-        .timetable th {
-            background-color: #f4f4f4; /* Subtle darker white color */
-            color: #000;
-            font-weight: bold;
-            padding: 6px;
-        }
+    .timetable th, .timetable td {
+      text-align: center;
+      padding: 4px;
+      font-size: 0.85rem;
+      border: 1px solid #e0e0e0;
+    }
 
-        /* Left column styling (weekdays) */
-        .timetable td:first-child {
-            background-color: #f4f4f4; /* Subtle darker white color */
-            color: #000;
-            font-weight: bold;
-            text-align: left;
-            padding-left: 10px;
-        }
+    .timetable th {
+      background-color: #f4f4f4;
+      color: #000;
+      font-weight: bold;
+      padding: 6px;
+    }
 
-        /* Highlight scheduled periods */
-        .timetable td.scheduled {
-            background-color: #023685;
-            color: white;
-            font-weight: bold;
-        }
+    .timetable td:first-child {
+      background-color: #f4f4f4;
+      color: #000;
+      font-weight: bold;
+      text-align: left;
+      padding-left: 10px;
+    }
 
-        /* Responsive table font adjustments */
-        @media (max-width: 768px) {
-            .timetable th, .timetable td {
-                font-size: 0.75rem;
-                padding: 3px;
-            }
-        }
-    </style>
+    .timetable td.scheduled {
+      background-color: #023685;
+      color: white;
+      font-weight: bold;
+    }
 
-<script>
-    document.addEventListener('DOMContentLoaded', function () {
-        fetch('tutorrefcode.html')
-            .then(response => response.text())
-            .then(data => {
-                document.body.insertAdjacentHTML('afterbegin', data);
+    @media (max-width: 768px) {
+      .timetable th, .timetable td {
+        font-size: 0.75rem;
+        padding: 3px;
+      }
 
-                // Attach event listener for toggle button
-                const toggleBtn = document.querySelector('.toggle-btn');
-                const sideNav = document.querySelector('.side-nav');
-                const mainContent = document.querySelector('.main-content');
-                const arrowIcon = document.querySelector('.toggle-btn i');
-                const resultsDropdownToggle = document.getElementById('resultsDropdownToggle');
-                const resultsDropdown = document.getElementById('resultsDropdown');
-
-                toggleBtn.addEventListener('click', function () {
-                    sideNav.classList.toggle('hide');
-                    if (sideNav.classList.contains('hide')) {
-                        arrowIcon.classList.replace('fa-arrow-left', 'fa-arrow-right');
-                        mainContent.style.marginLeft = '0';
-                    } else {
-                        arrowIcon.classList.replace('fa-arrow-right', 'fa-arrow-left');
-                        mainContent.style.marginLeft = '260px';
-                    }
-                });
-
-                resultsDropdownToggle.addEventListener('click', function (e) {
-                    e.preventDefault();
-                    resultsDropdown.classList.toggle('show');
-                });
-            });
-    });
-    </script>
+      .timetable-container {
+        margin-left: 0;
+      }
+    }
+  </style>
 </head>
 <body>
-    <div class="container timetable-container">
-        <div class="timetable-title">
-            Tutor Weekly Timetable
-        </div>
-        <table class="table timetable">
-            <thead>
-                <tr>
-                    <th>Day/Time</th>
-                    <th>07:00am - 07:40am</th>
-                    <th>07:40am - 08:20am</th>
-                    <th>08:20am - 09:00am</th>
-                    <th>09:00am - 09:40am</th>
-                    <th>09:40am - 10:20am</th>
-                    <th>10:20am - 11:00am</th>
-                    <th>11:00am - 11:40am</th>
-                    <th>11:40am - 12:20pm</th>
-                    <th>12:20pm - 01:00pm</th>
-                    <th>01:00pm - 01:40pm</th>
-                    <th>01:40pm - 02:20pm</th>
-                    <th>02:20pm - 03:00pm</th>
-                    <th>03:00pm - 03:40pm</th>
-                    <th>03:40pm - 04:20pm</th>
-                </tr>
-            </thead>
-            <tbody>
-                <tr>
-                    <td>Monday</td>
-                    <td class="scheduled">Module 1<br>Course A<br>07:00am</td>
-                    <td></td>
-                    <td class="scheduled">Module 2<br>Course B<br>08:20am</td>
-                    <td></td>
-                    <td></td>
-                    <td class="scheduled">Module 3<br>Course C<br>10:20am</td>
-                    <td></td>
-                    <td></td>
-                    <td></td>
-                    <td></td>
-                    <td></td>
-                    <td></td>
-                    <td></td>
-                    <td></td>
-                </tr>
-                <tr>
-                    <td>Tuesday</td>
-                    <td></td>
-                    <td></td>
-                    <td class="scheduled">Module 1<br>Course A<br>08:20am</td>
-                    <td></td>
-                    <td></td>
-                    <td></td>
-                    <td></td>
-                    <td></td>
-                    <td class="scheduled">Module 2<br>Course B<br>12:20pm</td>
-                    <td></td>
-                    <td></td>
-                    <td></td>
-                    <td></td>
-                    <td></td>
-                </tr>
-                <tr>
-                    <td>Wednesday</td>
-                    <td></td>
-                    <td class="scheduled">Module 3<br>Course C<br>07:40am</td>
-                    <td></td>
-                    <td></td>
-                    <td></td>
-                    <td class="scheduled">Module 1<br>Course A<br>10:20am</td>
-                    <td></td>
-                    <td></td>
-                    <td></td>
-                    <td></td>
-                    <td></td>
-                    <td></td>
-                    <td></td>
-                    <td></td>
-                </tr>
-                <tr>
-                    <td>Thursday</td>
-                    <td class="scheduled">Module 2<br>Course B<br>07:00am</td>
-                    <td></td>
-                    <td></td>
-                    <td></td>
-                    <td></td>
-                    <td></td>
-                    <td></td>
-                    <td></td>
-                    <td></td>
-                    <td class="scheduled">Module 3<br>Course C<br>01:00pm</td>
-                    <td></td>
-                    <td></td>
-                    <td></td>
-                    <td></td>
-                </tr>
-                <tr>
-                    <td>Friday</td>
-                    <td></td>
-                    <td></td>
-                    <td></td>
-                    <td></td>
-                    <td class="scheduled">Module 1<br>Course A<br>09:40am</td>
-                    <td></td>
-                    <td></td>
-                    <td></td>
-                    <td></td>
-                    <td></td>
-                    <td></td>
-                    <td></td>
-                    <td></td>
-                    <td></td>
-                </tr>
-            </tbody>
-        </table>
-    </div>
 
-    <!-- Bootstrap 5 JS -->
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js"></script>
+  <div id="layout"></div>
+
+  <div class="container timetable-container" id="timetable-container">
+    <div class="timetable-title">Tutor Weekly Timetable</div>
+    <table class="table timetable">
+      <thead>
+        <tr>
+          <th>Day/Time</th>
+          <th>07:00am - 07:40am</th>
+          <th>07:40am - 08:20am</th>
+          <th>08:20am - 09:00am</th>
+          <th>09:00am - 09:40am</th>
+          <th>09:40am - 10:20am</th>
+          <th>10:20am - 11:00am</th>
+          <th>11:00am - 11:40am</th>
+          <th>11:40am - 12:20pm</th>
+          <th>12:20pm - 01:00pm</th>
+          <th>01:00pm - 01:40pm</th>
+          <th>01:40pm - 02:20pm</th>
+          <th>02:20pm - 03:00pm</th>
+          <th>03:00pm - 03:40pm</th>
+          <th>03:40pm - 04:20pm</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr><td>Monday</td><td class="scheduled">Module 1<br>Course A<br>07:00am</td><td></td><td class="scheduled">Module 2<br>Course B<br>08:20am</td><td></td><td></td><td class="scheduled">Module 3<br>Course C<br>10:20am</td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td></tr>
+        <tr><td>Tuesday</td><td></td><td></td><td class="scheduled">Module 1<br>Course A<br>08:20am</td><td></td><td></td><td></td><td></td><td></td><td class="scheduled">Module 2<br>Course B<br>12:20pm</td><td></td><td></td><td></td><td></td><td></td></tr>
+        <tr><td>Wednesday</td><td></td><td class="scheduled">Module 3<br>Course C<br>07:40am</td><td></td><td></td><td></td><td class="scheduled">Module 1<br>Course A<br>10:20am</td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td></tr>
+        <tr><td>Thursday</td><td class="scheduled">Module 2<br>Course B<br>07:00am</td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td class="scheduled">Module 3<br>Course C<br>01:00pm</td><td></td><td></td><td></td><td></td></tr>
+        <tr><td>Friday</td><td></td><td></td><td></td><td></td><td class="scheduled">Module 1<br>Course A<br>09:40am</td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td></tr>
+      </tbody>
+    </table>
+  </div>
+
+  <script>
+    document.addEventListener('DOMContentLoaded', function () {
+      fetch('tutorrefcode.html')
+        .then(response => response.text())
+        .then(data => {
+          document.getElementById('layout').innerHTML = data;
+
+          const toggleBtn = document.querySelector('.toggle-btn');
+          const sideNav = document.querySelector('.side-nav');
+          const mainContent = document.querySelector('.main-content');
+          const arrowIcon = document.querySelector('.toggle-btn i');
+          const timetableContainer = document.querySelector('.timetable-container');
+
+          toggleBtn.addEventListener('click', function () {
+            sideNav.classList.toggle('hide');
+            if (sideNav.classList.contains('hide')) {
+              arrowIcon.classList.replace('fa-arrow-left', 'fa-arrow-right');
+              mainContent.style.marginLeft = '0';
+              timetableContainer.style.marginLeft = '0';
+            } else {
+              arrowIcon.classList.replace('fa-arrow-right', 'fa-arrow-left');
+              mainContent.style.marginLeft = '260px';
+              timetableContainer.style.marginLeft = '260px';
+            }
+          });
+        });
+    });
+  </script>
+
 </body>
 </html>
+
