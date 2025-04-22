@@ -132,12 +132,25 @@
 
     <script>
         document.addEventListener('DOMContentLoaded', function () {
-            // Load the top bar and side navigation from an external file
+            // Fetch the content of tutorrefcode.html
             fetch('tutorrefcode.html')
                 .then(response => response.text())
                 .then(data => {
-                    document.getElementById('top-bar').innerHTML = data;
-                    document.getElementById('side-nav').innerHTML = data;
+                    // Parse the fetched data as HTML
+                    const parser = new DOMParser();
+                    const doc = parser.parseFromString(data, 'text/html');
+
+                    // Extract and inject the top bar
+                    const topBar = doc.querySelector('.top-bar');
+                    if (topBar) {
+                        document.getElementById('top-bar').innerHTML = topBar.outerHTML;
+                    }
+
+                    // Extract and inject the side navigation
+                    const sideNav = doc.querySelector('.side-nav');
+                    if (sideNav) {
+                        document.getElementById('side-nav').innerHTML = sideNav.outerHTML;
+                    }
                 })
                 .catch(error => console.error('Error loading external content:', error));
         });
