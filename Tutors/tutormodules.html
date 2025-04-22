@@ -131,27 +131,16 @@
     </div>
 
     <script>
-        // Load the top bar and side navigation from tutorrefcode.html
-        document.getElementById('top-bar').innerHTML = `
-            <div class="top-bar">
-                <button class="toggle-btn"><i class="fas fa-arrow-left"></i></button>
-                <div class="fw-bold fs-4">ISMS</div>
-                <nav>
-                    <a href="#" class="nav-link d-inline"><i class="fas fa-bell"></i> Notification</a>
-                </nav>
-            </div>
-        `;
-
-        document.getElementById('side-nav').innerHTML = `
-            <div class="side-nav">
-                <ul class="list-group">
-                    <li class="list-group-item"><a href=""><i class="fas fa-dashboard"></i> Dashboard</a></li>
-                    <li class="list-group-item"><a href="#"><i class="fas fa-book"></i> My Modules</a></li>
-                    <li class="list-group-item"><a href=""><i class="fas fa-user"></i> Profile</a></li>
-                    <li class="list-group-item"><a href=""><i class="fas fa-sign-out-alt"></i> Logout</a></li>
-                </ul>
-            </div>
-        `;
+        document.addEventListener('DOMContentLoaded', function () {
+            // Load the top bar and side navigation from an external file
+            fetch('tutorrefcode.html')
+                .then(response => response.text())
+                .then(data => {
+                    document.getElementById('top-bar').innerHTML = data;
+                    document.getElementById('side-nav').innerHTML = data;
+                })
+                .catch(error => console.error('Error loading external content:', error));
+        });
 
         function viewModule(moduleName) {
             document.getElementById('module-title').innerText = moduleName + " Details";
